@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "243688042026",
+    "firebase_url": "https://kimyatubitak-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "kimyatubitak",
+    "storage_bucket": "kimyatubitak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243688042026:android:a6212ebb3d112b34745d53",
+        "android_client_info": {
+          "package_name": "com.cidqu.kimyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243688042026-s6rkibpcn5jtt193bp9mulq14i9l21kg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyVXVwZBcXP7sUhXzopQb2F1gYA9nObXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243688042026-s6rkibpcn5jtt193bp9mulq14i9l21kg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "243688042026-h5gm7c0f3n368rtqpn4ene9fsodmhhfl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cidqu.kimyapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
