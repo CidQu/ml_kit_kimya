@@ -6,6 +6,7 @@ import 'package:camera_app/yanlisekran.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:http/http.dart' as http;
+import 'package:sozluk/sozluk.dart';
 import 'bilgiekrani.dart';
 import 'package:html/parser.dart';
 
@@ -26,6 +27,8 @@ class _CameraScreenState extends State<CameraScreen> {
     initializeCamera(selectedCamera);
     super.initState();
   }
+
+  var sozluk = SozlukTr();
 
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
@@ -73,14 +76,10 @@ class _CameraScreenState extends State<CameraScreen> {
       var ceviri = harita['data']['translations'].last['translatedText'];
       print(ceviri);
       if (ceviri == "sofra takımı") {
-        ceviri == 'Pet Şişe';
-        var res = await http.Client()
-            .get(Uri.parse('https://sozluk.gov.tr/gts?ara=$ceviri'));
-        var body = res.body;
-        var decoded = jsonDecode(body);
-        var json = decoded[0];
-        var sozlukanlam = json["anlamlarListe"][0]["anlam"];
+        ceviri = 'Pet Şişe';
+        var sozlukanlam = await sozluk.anlam(ceviri);
         print(sozlukanlam);
+        isBusy = false;
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -88,27 +87,19 @@ class _CameraScreenState extends State<CameraScreen> {
                     sonuc: ceviri, oran: oran, wikibilgi: sozlukanlam)));
       }
       if (ceviri == 'metal') {
-        ceviri == 'metal';
-        var res = await http.Client()
-            .get(Uri.parse('https://sozluk.gov.tr/gts?ara=$ceviri'));
-        var body = res.body;
-        var decoded = jsonDecode(body);
-        var json = decoded[0];
-        var sozlukanlam = json["anlamlarListe"][0]["anlam"];
+        ceviri = 'Metal';
+        var sozlukanlam = await sozluk.anlam(ceviri);
         print(sozlukanlam);
+        isBusy = false;
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => BilgiEkraniYanlis(
                     sonuc: ceviri, oran: oran, wikibilgi: sozlukanlam)));
       }
-      var res = await http.Client()
-          .get(Uri.parse('https://sozluk.gov.tr/gts?ara=$ceviri'));
-      var body = res.body;
-      var decoded = jsonDecode(body);
-      var json = decoded[0];
-      var sozlukanlam = json["anlamlarListe"][0]["anlam"];
+      var sozlukanlam = await sozluk.anlam(ceviri);
       print(sozlukanlam);
+      isBusy = false;
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -162,6 +153,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 GestureDetector(
                   onTap: () async {
                     if (isBusy == false) {
+                      isBusy = true;
                       await _initializeControllerFuture;
                       var xFile = await _controller.takePicture();
                       capturedImages.add(File(xFile.path));
