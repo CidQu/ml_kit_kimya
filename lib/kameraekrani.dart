@@ -68,7 +68,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
   wikibilgileri(sonuc, oran) async {
     var transurl = Uri.parse(
-        'https://translation.googleapis.com/language/translate/v2?key=AIzaSyCZq3sA4fYlXomz9RZx2VjIBey_0TYCKlw');
+        'https://translation.googleapis.com/language/translate/v2?key=AIzaSyTYCKlw');
     var response = await http.post(transurl,
         body: {'q': sonuc, 'source': 'en', 'target': 'tr', 'format': 'text'});
     if (response.statusCode == 200) {
